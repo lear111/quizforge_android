@@ -83,6 +83,7 @@ public final class MainActivity extends Activity {
     private final ExecutorService work = Executors.newSingleThreadExecutor();
     private final ExecutorService downloads = Executors.newSingleThreadExecutor();
     private final ExecutorService modelNetwork = Executors.newSingleThreadExecutor();
+    private final ExecutorService accountNetwork = Executors.newSingleThreadExecutor();
     private LinearLayout container;
     private WebView browser;
     private TextView loadingHint;
@@ -91,6 +92,7 @@ public final class MainActivity extends Activity {
     private AppDocumentStore documents;
     private HubImportClient hubClient;
     private AiGateway ai;
+    private volatile HubConnection hubAccount;
     private AnswerAreaRenderer answerAreaRenderer;
     private CancellationSignal hubCancellation;
     private AlertDialog hubDialog;
@@ -145,7 +147,8 @@ public final class MainActivity extends Activity {
                 documents = new AppDocumentStore(getApplicationContext());
                 repository.setImportValidator((extension, questions) -> rules.run(extension,
                         new JSONObject().put("op", "validateBank").put("questions", questions)));
-                try { ai = new AiGateway(getApplicationContext(), (bankId, assetId) -> repository.getResource(bankId, assetId)); }
+                hubAccount = new HubConnection(getApplicationContext());
+                try { ai = new AiGateway(getApplicationContext(), (bankId, assetId) -> repository.getResource(bankId, assetId)); ai.attachHub(hubAccount); }
                 catch (Exception exception) { aiInitializationError = exception; }
             } catch (Exception exception) { initializationError = exception; }
         });
@@ -198,6 +201,7 @@ public final class MainActivity extends Activity {
                 return result == null ? refused(404, "Not Found") : result;
             }
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (HubConnection.hubPage(request.getUrl().toString())) { openCustomTab(request.getUrl()); return true; }
                 return !trustedAsset(request.getUrl());
             }
             @Override public void onPageFinished(WebView view, String url) {
@@ -396,6 +400,30 @@ public final class MainActivity extends Activity {
             if (method.equals("hub.open")) { openHub(reply); return; }
             PendingReply response = reply;
             JSONObject arguments = args;
+            if (method.equals("hub.browse")) {
+                String url = args.optString("url");
+                if (!HubConnection.hubPage(url)) { reply.failure(new StorageException("HUB_URL_REFUSED", "只能打开 QuizForge 官方网站")); return; }
+                if (openCustomTab(Uri.parse(url))) reply.success(new JSONObject().put("opened", true));
+                else reply.failure(new StorageException("BROWSER_UNAVAILABLE", "请先安装浏览器，再登录 QuizForge 账号"));
+                return;
+            }
+            if (method.startsWith("hub.connection.")) {
+                // Hub account calls go over the network; keep them off the storage queue.
+                accountNetwork.execute(() -> {
+                    try {
+                        HubConnection account = hubAccount;
+                        if (account == null) throw new StorageException("HUB_UNAVAILABLE", "账号服务尚未就绪，请稍后重试");
+                        switch (method) {
+                            case "hub.connection.login": response.success(account.start()); break;
+                            case "hub.connection.account": response.success(account.account().put("manageUrl", HubConnection.ORIGIN + "/manage/")); break;
+                            case "hub.connection.redeem": response.success(account.redeem(arguments.opt("code"))); break;
+                            case "hub.connection.logout": response.success(account.logout()); break;
+                            default: throw new StorageException("ACTION_UNAVAILABLE", "当前离线版本未提供此操作");
+                        }
+                    } catch (Exception exception) { response.failure(exception); }
+                });
+                return;
+            }
             if (method.equals("settings.ai.test") || method.equals("ai.request")) {
                 if (modelRequestBusy) { response.failure(new StorageException("AI_BUSY", "模型正在处理上一项请求，请等待完成后重试")); return; }
                 modelRequestBusy = true;
@@ -467,7 +495,7 @@ public final class MainActivity extends Activity {
             case "system.time": return System.currentTimeMillis();
             case "settings.ai.get":
                 if (ai == null) throw new StorageException("AI_UNAVAILABLE", "AI 设置暂时无法读取，本地刷题仍可使用");
-                return ai.status();
+                return ai.status().put("hub", hubAccount == null ? new JSONObject().put("connected", false) : hubAccount.summary());
             case "settings.ai.update":
                 if (ai == null) throw new StorageException("AI_UNAVAILABLE", "AI 设置暂时无法保存，本地刷题仍可使用");
                 return ai.update(args.getJSONObject("profile"));
@@ -551,8 +579,29 @@ public final class MainActivity extends Activity {
         catch (Exception exception) { reply.failure(exception); }
     }
 
+    /** Opens a Hub page in Custom Tabs (system browser), never inside the app WebView. */
+    private boolean openCustomTab(Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE);
+        // The Custom Tabs protocol without the support library: a session extra, even null, requests a tab.
+        Bundle extras = new Bundle(); extras.putBinder("android.support.customtabs.extra.SESSION", null); intent.putExtras(extras);
+        try { startActivity(intent); return true; }
+        catch (ActivityNotFoundException exception) { return false; }
+    }
+
+    private void completeHubLogin(Uri uri) {
+        accountNetwork.execute(() -> {
+            try {
+                HubConnection account = hubAccount;
+                if (account == null) throw new StorageException("HUB_UNAVAILABLE", "账号服务尚未就绪，请回到 AI 设置重新登录");
+                JSONObject summary = account.complete(uri);
+                main.post(() -> toast("已登录 QuizForge 账号 " + summary.optJSONObject("user").optString("name")));
+            } catch (Exception exception) { main.post(() -> toast(publicMessage(exception))); }
+        });
+    }
+
     private void incomingUri(Uri uri) {
-        if ("quizforge".equals(uri.getScheme())) beginHubImport(uri.toString());
+        if (HubConnection.callback(uri)) completeHubLogin(uri);
+        else if ("quizforge".equals(uri.getScheme())) beginHubImport(uri.toString());
         else importUri(uri, null);
     }
 
@@ -838,7 +887,7 @@ public final class MainActivity extends Activity {
         destroyed = true;
         if (hubCancellation != null) hubCancellation.cancel();
         finishHubImport();downloads.shutdown();
-        if (ai != null) ai.close();modelNetwork.shutdown();
+        if (ai != null) ai.close();modelNetwork.shutdown();accountNetwork.shutdown();
         if (answerAreaRenderer != null) answerAreaRenderer.destroy();
         hideFullscreen();
         if (imageReply != null) { imageReply.onReceiveValue(null); imageReply = null; }

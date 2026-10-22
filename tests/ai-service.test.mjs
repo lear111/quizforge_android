@@ -158,3 +158,9 @@ test('a committed AI review recovers confirmation after a task-file write interr
 });
 
 
+
+test('free-quota grading keeps the provider the native gateway actually used',async()=>{
+ const f=fixture({model:async()=>({output:'{"score":2.5,"feedback":"建议反馈"}',model:'quizforge-official',provider:'quizforge-official',usage:{total_tokens:7}})});
+ await submitted(f);const task=await f.handle(path+'/ai/grade','POST',{requestId:'official-ai'});await f.ai.settled();
+ const saved=await f.handle(path+'/ai/tasks/'+task.taskId);assert.equal(saved.candidate.provider,'quizforge-official');assert.equal(saved.candidate.model,'quizforge-official');
+});

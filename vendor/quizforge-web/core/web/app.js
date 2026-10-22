@@ -15,6 +15,8 @@ import {checkEditorExit,renderEditorStatus,bindEditorLeaveNotice,shouldWarnBefor
 import {mountPracticeSummary} from './practice/practice-summary.js';
 import {bindNetworkSettings} from './shell/network-settings.js';
 import {bindAiSettings} from './ai/ai-settings.js';
+import {bindUserCenter} from './ai/user-center.js';
+import {createHubLogin} from './ai/hub-login.js';
 import {bindExamMode} from './exam/exam-mode.js';
 import {bindDevelopmentSettings} from './development/development-settings.js';
 import {createDevelopmentWatcher} from './development/development-watch.js';
@@ -78,7 +80,7 @@ function makeWriteQueue(pane){return createWriteQueue({
     onSaved:(qid,action,value)=>{
       questionsCache.set(questionCacheKey(pane,qid),value);
       pane.collection.states[qid]=value.state;
-      if(pane.questionId===qid){pane.payload=value;if(action==='retry'&&pane.plugin?.frame?.qfSharedAnswerAreas?.length){pane.ink.clear();clearTimeout(pane.inkTimer);pane.inkTimer=null;pane.whiteboard.load(value.draft);}if(action!=='whiteboard'&&action!=='draft')pane.plugin?.update(contextFor(pane));}
+      if(pane.questionId===qid){pane.payload=value;if(action==='retry'&&pane.plugin?.frame?.qfSharedAnswerAreas?.length){const before=pane.whiteboard.getDraft?.()?.strokes||[],kept=new Set((value.draft?.strokes||[]).map(stroke=>stroke.id));pane.ink.clear();clearTimeout(pane.inkTimer);pane.inkTimer=null;pane.whiteboard.load(value.draft);pane.whiteboard.forgetAnswerInk?.(before.map(stroke=>stroke.id).filter(id=>!kept.has(id)));}if(action!=='whiteboard'&&action!=='draft')pane.plugin?.update(contextFor(pane));}
       if(active()===pane){renderOutline();updateChrome();saveStatus(pane.writes.hasFailures?'仍有内容未保存':pane.answerPreviews?.size?'答案尚未保存':practiceSaveLabel(pane),pane.writes.hasFailures?'error':pane.answerPreviews?.size?'saving':'');renderRecovery();}
     },
     onFailed:async(qid,_action,error)=>{
@@ -809,7 +811,9 @@ for(const media of [libraryDrawer,outlineDrawer])media.addEventListener('change'
 phoneLayout.addEventListener('change',()=>{for(const pane of collections.values())syncPracticeCamera(pane);});
 $('#scrim').addEventListener('click',closeDrawers);syncSidebars();
 bindLibraryResize({shell:$('.app-shell'),library:$('.library'),handle:$('#library-resize')});
-bindAiSettings({request});
+const hubLogin=createHubLogin({request});
+bindAiSettings({request,login:hubLogin});
+bindUserCenter({request,login:hubLogin});
 const examControls=bindExamMode({document,request,active,collectionPath,makeRequestId,onDeadline:()=>updateChrome(),flush:pane=>transitionTo(()=>flushPane(pane)),open:(kind,id)=>transitionTo(()=>openCollection(kind,id)),onError:failure,refresh:(pane,value)=>transitionTo(()=>refreshExam(pane,value))});
 async function refreshExam(pane,exam){
   if(pane.closed)return;const changed=pane.exam?.status!==exam.status||JSON.stringify(pane.exam?.gradingErrors||[])!==JSON.stringify(exam.gradingErrors||[]);pane.exam=exam;

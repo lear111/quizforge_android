@@ -176,6 +176,9 @@ export function createAiService(nativeCall,options={}){
       if(parts[3]==='credential'&&method==='GET'){const settings=await nativeCall('settings.ai.get',{});return {apiKey:settings.apiKeyConfigured?SAVED_KEY_PLACEHOLDER:''};}
       if(parts.length===3&&method==='PUT'){const profile=clone(body);if(profile.apiKey===SAVED_KEY_PLACEHOLDER){delete profile.apiKey;delete profile.clearApiKey;}return nativeCall('settings.ai.update',{profile});}
       if(parts[3]==='test'&&method==='POST')return nativeCall('settings.ai.test',{});
+      // Hub account for the free AI quota (Web /api/settings/ai/hub*); the token stays native.
+      if(parts[3]==='hub'&&parts.length===4&&method==='GET')return nativeCall('hub.connection.account',{});
+      if(parts[3]==='hub'&&parts.length===5&&method==='POST'&&['login','logout','redeem'].includes(parts[4]))return nativeCall('hub.connection.'+parts[4],parts[4]==='redeem'?{code:plain(body)?body.code:undefined}:{});
       throw fail('NOT_FOUND','AI 设置接口不存在',404);
     }
     if(parts[0]!=='api'||parts[1]!=='collections'||parts[4]!=='questions'||parts[6]!=='ai')return undefined;

@@ -5,6 +5,7 @@ import {createLibraryService,ANDROID_UNAVAILABLE_SELECTORS} from './web-library-
 import {bindAndroidLayoutNotifications} from './android-layout-events.js';
 import {createExamService} from './exam-service.js';
 import {createAiService} from './ai-service.js';
+import {bindHubLinks} from './android-hub-links.js';
 
 const loadText=async path=>{
   const response=await fetch('/assets/web/'+path);
@@ -23,6 +24,7 @@ const notice=error=>{
   if(node){node.textContent=error.message||String(error);node.hidden=false;}
 };
 let importing=false;
+bindHubLinks({nativeCall,notice});
 
 document.getElementById('library-download').addEventListener('click',async event=>{
   event.preventDefault();event.stopImmediatePropagation();

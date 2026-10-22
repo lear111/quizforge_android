@@ -1,6 +1,8 @@
 # Android AI 评分边界与联调
 
-本模块复用现有 Web 的设置页、题卡 AI 消息和任务 REST 语义。它不依赖 Hub 登录，也不上传题库或答题记录到 Hub。只有用户测试模型、点击 AI 评分或启用自动评分后，原生网络层才向用户选择的模型发送评分材料。
+本模块复用现有 Web 的设置页、题卡 AI 消息和任务 REST 语义，不上传题库或答题记录到 Hub。只有用户测试模型、点击 AI 评分或启用自动评分后，原生网络层才向选中的评分来源发送评分材料。
+
+2026-10-22 起，评分来源与 Web 一致，分为“使用免费 AI 额度”（Hub 账号登录，协议 v1 §7.2）和“使用自定义模型”，两者可以同时开启，优先使用免费额度。登录、令牌保存、错误映射与回退规则见 `docs/HUB_AI_2026-10-22.md`。
 
 ## 原生接口
 
@@ -11,6 +13,8 @@
 | `settings.ai.get` | `{}` | `status()` |
 | `settings.ai.update` | `{profile:{...}}` | `update(profile)` |
 | `settings.ai.test` | `{}` | `testConnection()` |
+| `hub.connection.login` / `account` / `redeem` / `logout` | `{}` / `{}` / `{code}` / `{}` | `HubConnection` |
+| `hub.browse` | `{url}` | 只接受固定 Hub origin，用 Custom Tabs 打开 |
 | `ai.request` | `{bankId,input,configurationVersion?,repair?,invalidOutput?}` | `generate(args)` |
 
 模型测试与生成请求使用独立网络 executor，不能占用本地保存队列。`close()` 取消此 gateway 的未完成请求。没有真实密钥读取接口；配置以 Keystore 生成的 AES-256-GCM 密钥加密后写入私有 AtomicFile，解密/密钥损坏时保留原文件并报错。Android Keystore 保护的是加密密钥，解密后的 API Key 在原生进程调用期间仍会存在于内存，不宣称抵御已控制应用进程的攻击者。

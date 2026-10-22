@@ -13,6 +13,8 @@ const work=await fs.mkdtemp(path.join(root,'.temp','web-snapshot-')),staged=path
 const inside=value=>{const resolved=path.resolve(value);if(!resolved.startsWith(root+path.sep))throw Error('Snapshot target outside Android workspace');return resolved;};
 inside(target);inside(work);inside(staged);
 const sourceRevision=execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+// A snapshot of a clean checkout is exactly that commit; record any local edits otherwise.
+const includesWorkingTreeChanges=execFileSync('git',['-C',source,'status','--porcelain','--',...groups],{encoding:'utf8'}).trim()!=='';
 const files=[];
 async function copy(relative){
   const from=path.join(source,relative), stat=await fs.lstat(from);
@@ -33,6 +35,6 @@ await fs.mkdir(path.dirname(target),{recursive:true});
 try{await fs.copyFile(manifest,path.join(work,'snapshot.previous.json'));}catch(error){if(error.code!=='ENOENT')throw error;}
 try{await fs.rename(target,inside(previous));}catch(error){if(error.code!=='ENOENT')throw error;}
 await fs.rename(staged,target);
-await fs.writeFile(manifest,JSON.stringify({schemaVersion:1,source:'quizforge_web working tree',sourceRevision,includesWorkingTreeChanges:true,capturedAt:new Date().toISOString(),files},null,2)+'\n');
+await fs.writeFile(manifest,JSON.stringify({schemaVersion:1,source:includesWorkingTreeChanges?'quizforge_web working tree':'quizforge_web commit',sourceRevision,includesWorkingTreeChanges,capturedAt:new Date().toISOString(),files},null,2)+'\n');
 console.log(`Captured ${files.length} code and public base-example files; no personal banks or practice state included.`);
 console.log('Previous code snapshot retained in '+work);

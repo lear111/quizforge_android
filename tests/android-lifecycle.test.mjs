@@ -150,7 +150,7 @@ test('the actual Android preload forwards read options to both resource owners w
   const services={},received=[],context={window:{quizforgeApp:{resourceContext:options=>{received.push(options);return options?.reading?{kind:'bank',bankId:'new-bank'}:{kind:'exam',bankId:'old-exam'};}}},
     document:{documentElement:{dataset:{}},head:{append(){}},createElement(){return {dataset:{}};},getElementById(){return {addEventListener(){}};},addEventListener(){}},
     nativeCall(){},createAiService:()=>({}),createPracticeService:(_native,options)=>{services.practice=options;return {domain:{host:{}}};},
-    createExamService:(_native,options)=>{services.exam=options;return {};},createLibraryService:()=>({}),installOfflineFetch(){},bindAndroidLayoutNotifications(){},ANDROID_UNAVAILABLE_SELECTORS:[]};
+    createExamService:(_native,options)=>{services.exam=options;return {};},createLibraryService:()=>({}),installOfflineFetch(){},bindAndroidLayoutNotifications(){},bindHubLinks(){},ANDROID_UNAVAILABLE_SELECTORS:[]};
   vm.runInNewContext(preload.replace(/^import .*;\r?\n/gm,''),context);
   for(const service of Object.values(services)){
     const read={reading:true};

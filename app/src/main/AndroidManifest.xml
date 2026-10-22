@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="quizforge" android:host="hub" android:path="/import"/>
+                <data android:scheme="quizforge" android:host="hub" android:path="/connect"/>
             </intent-filter>
         </activity>
         <provider android:name=".ImageFileProvider" android:authorities="${applicationId}.images"

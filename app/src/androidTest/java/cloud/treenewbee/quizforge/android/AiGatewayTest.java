@@ -74,7 +74,7 @@ public final class AiGatewayTest {
                 .body(ResponseBody.create(body, MediaType.get("application/json"))).build();
     }
     private static JSONObject config(String key) throws Exception {
-        return new JSONObject().put("enabled", true).put("baseUrl", "https://model.invalid/v1").put("model", "fictional-model").put("apiKey", key);
+        return new JSONObject().put("enabled", true).put("useCustom", true).put("baseUrl", "https://model.invalid/v1").put("model", "fictional-model").put("apiKey", key);
     }
     private static JSONObject input() throws Exception {
         JSONArray block = new JSONArray().put(new JSONObject().put("type", "text").put("text", "fictional test material"));
@@ -264,5 +264,116 @@ public final class AiGatewayTest {
         Files.write(file.toPath(), "{\"schemaVersion\":1,\"iv\":\"AA==\",\"ciphertext\":\"AA==\"}".getBytes(StandardCharsets.UTF_8));
         String damaged = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
         rejects("AI_SETTINGS_UNAVAILABLE", () -> create((request, body, i) -> { throw new AssertionError(); })); assertEquals(damaged, new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8));
+    }
+
+    // A fake connected Hub account for the free AI quota; the token is synthetic.
+    private static final String DEVICE_TOKEN = "qfd_" + "B".repeat(43);
+    private static final class FakeHub implements AiGateway.HubToken {
+        String token = DEVICE_TOKEN; final List<String> invalidated = new ArrayList<>();
+        @Override public String token() { return token; }
+        @Override public void invalidate(String value) { invalidated.add(value); if (value.equals(token)) token = null; }
+    }
+    private static Response officialError(Request request, int status, String code) throws Exception {
+        return raw(request, status, new JSONObject().put("error", new JSONObject().put("code", code).put("message", "synthetic gateway text " + DEVICE_TOKEN)).toString());
+    }
+    private static boolean official(Request request) { return request.url().toString().equals("https://quizforge.treenewbee.cloud/api/ai/v1/chat/completions"); }
+
+    @Test public void settingsSavedBeforeGradingSourcesMeanTheCustomModel() throws Exception {
+        gateway = create((request, body, i) -> model(request, "{\"score\":2.5,\"feedback\":\"ok\"}")); gateway.update(config("synthetic-key"));
+        java.lang.reflect.Field field = AiGateway.class.getDeclaredField("profile"); field.setAccessible(true);
+        JSONObject legacy = new JSONObject(field.get(gateway).toString()); legacy.remove("useOfficial"); legacy.remove("useCustom");
+        java.lang.reflect.Method persist = AiGateway.class.getDeclaredMethod("persist", JSONObject.class); persist.setAccessible(true); persist.invoke(gateway, legacy);
+        AiGateway reopened = create((request, body, i) -> model(request, "{\"score\":2.5,\"feedback\":\"ok\"}"));
+        try {
+            JSONObject status = reopened.status(); assertTrue(status.getBoolean("useCustom")); assertFalse(status.getBoolean("useOfficial"));
+            assertEquals("openai-compatible", reopened.generate(input()).getString("provider"));
+        } finally { reopened.close(); }
+        // Enabling with no source is allowed (the page asks for one); the custom source needs its address and model.
+        AiGateway fresh = new AiGateway(new File(folder, "fresh.enc"), alias + ".fresh", (bank, id) -> null, HubImportClient.newAnonymousClient());
+        try {
+            assertTrue(fresh.update(new JSONObject().put("enabled", true)).getBoolean("enabled"));
+            rejects("AI_NOT_CONFIGURED", () -> fresh.update(new JSONObject().put("useCustom", true)));
+            rejects("AI_NOT_CONFIGURED", () -> fresh.generate(input()));
+        } finally { fresh.close(); KeyStore store = KeyStore.getInstance("AndroidKeyStore"); store.load(null); if (store.containsAlias(alias + ".fresh")) store.deleteEntry(alias + ".fresh"); }
+    }
+
+    @Test public void freeQuotaUsesTheFixedGatewayDeviceTokenVisionAndJson() throws Exception {
+        FakeHub hub = new FakeHub(); JSONObject attachment = png();
+        gateway = create((request, body, i) -> model(request, "{\"score\":2.5,\"feedback\":\"" + DEVICE_TOKEN + "\"}"), (bank, id) -> attachment); gateway.attachHub(hub);
+        String version = gateway.update(new JSONObject().put("enabled", true).put("useOfficial", true)).getString("configurationVersion");
+        assertFalse(gateway.status().getBoolean("vision"));
+        JSONObject result = gateway.generate(withAttachments(attachment).put("configurationVersion", version));
+        assertEquals("quizforge-official", result.getString("provider")); assertEquals("quizforge-official", result.getString("model"));
+        assertFalse(result.toString().contains(DEVICE_TOKEN));
+        assertEquals(1, requests.size()); assertTrue(official(requests.get(0))); assertEquals("Bearer " + DEVICE_TOKEN, requests.get(0).header("Authorization"));
+        JSONObject sent = bodies.get(0); assertEquals("quizforge-official", sent.getString("model")); assertFalse(sent.getBoolean("stream"));
+        assertEquals("json_object", sent.getJSONObject("response_format").getString("type")); assertEquals(8192, sent.getInt("max_tokens"));
+        JSONArray parts = sent.getJSONArray("messages").getJSONObject(1).getJSONArray("content"); boolean image = false;
+        for (int i = 0; i < parts.length(); i++) if (parts.getJSONObject(i).optString("type").equals("image_url")) image = parts.getJSONObject(i).getJSONObject("image_url").getString("url").startsWith("data:image/png;base64,");
+        assertTrue(image);
+        assertFalse(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8).contains(DEVICE_TOKEN));
+    }
+
+    @Test public void freeQuotaAloneMapsGatewayErrorsAndLoginLossClearsTheToken() throws Exception {
+        FakeHub hub = new FakeHub(); int[] status = {402}; String[] code = {"AI_BALANCE_EXHAUSTED"};
+        gateway = create((request, body, i) -> officialError(request, status[0], code[0])); gateway.attachHub(hub);
+        gateway.update(new JSONObject().put("enabled", true).put("useOfficial", true));
+        Object[][] cases = {{402, "AI_BALANCE_EXHAUSTED", "AI_OFFICIAL_BALANCE"}, {503, "AI_DISABLED", "AI_OFFICIAL_UNAVAILABLE"}, {404, "OFFICIAL_AI_DISABLED", "AI_OFFICIAL_UNAVAILABLE"},
+                {429, "AI_BUSY", "AI_RATE_LIMIT"}, {502, "AI_UPSTREAM_FAILED", "AI_UPSTREAM"}, {413, "AI_REQUEST_TOO_LARGE", "AI_INPUT_LIMIT"}, {400, "AI_REQUEST_UNSUPPORTED", "AI_CONFIG"}};
+        for (Object[] item : cases) {
+            status[0] = (Integer) item[0]; code[0] = (String) item[1];
+            try { gateway.generate(input()); fail(); } catch (StorageException exception) { assertEquals((String) item[2], exception.code); assertFalse(exception.getMessage().contains(DEVICE_TOKEN)); assertFalse(exception.getMessage().contains("synthetic gateway text")); }
+        }
+        assertTrue(hub.invalidated.isEmpty()); assertEquals(DEVICE_TOKEN, hub.token);
+        status[0] = 401; code[0] = "DEVICE_TOKEN_INVALID";
+        rejects("AI_OFFICIAL_LOGIN", () -> gateway.generate(input()));
+        assertEquals(List.of(DEVICE_TOKEN), hub.invalidated); assertNull(hub.token);
+        int sent = requests.size();
+        rejects("AI_OFFICIAL_LOGIN", () -> gateway.generate(input())); assertEquals(sent, requests.size());
+    }
+
+    @Test public void bothSourcesFallBackToTheCustomModelOnlyForUnavailableFreeQuota() throws Exception {
+        FakeHub hub = new FakeHub(); int[] status = {402}; String[] code = {"AI_BALANCE_EXHAUSTED"};
+        gateway = create((request, body, i) -> official(request) ? officialError(request, status[0], code[0]) : model(request, "{\"score\":2.5,\"feedback\":\"custom\"}"));
+        gateway.attachHub(hub); gateway.update(config("synthetic-key").put("useOfficial", true));
+        Object[][] fallback = {{402, "AI_BALANCE_EXHAUSTED"}, {503, "AI_DISABLED"}, {429, "AI_BUSY"}, {502, "AI_UPSTREAM_FAILED"}, {404, "OFFICIAL_AI_DISABLED"}, {401, "DEVICE_TOKEN_INVALID"}};
+        for (Object[] item : fallback) {
+            requests.clear(); bodies.clear(); status[0] = (Integer) item[0]; code[0] = (String) item[1];
+            JSONObject result = gateway.generate(input());
+            assertEquals("openai-compatible", result.getString("provider")); assertEquals("fictional-model", result.getString("model"));
+            assertEquals(2, requests.size()); assertTrue(official(requests.get(0))); assertEquals("Bearer synthetic-key", requests.get(1).header("Authorization"));
+            assertFalse(bodies.get(1).toString().contains(DEVICE_TOKEN));
+        }
+        // After the lost login the free quota is skipped without a request.
+        requests.clear(); assertEquals("openai-compatible", gateway.generate(input()).getString("provider")); assertEquals(1, requests.size()); assertFalse(official(requests.get(0)));
+        // Request errors are not a reason to switch sources.
+        hub.token = DEVICE_TOKEN; requests.clear(); status[0] = 413; code[0] = "AI_REQUEST_TOO_LARGE";
+        rejects("AI_INPUT_LIMIT", () -> gateway.generate(input())); assertEquals(1, requests.size());
+        // A working free quota grades first and is recorded as the provider.
+        gateway = create((request, body, i) -> model(request, "{\"score\":2.5,\"feedback\":\"official\"}")); gateway.attachHub(hub);
+        requests.clear(); assertEquals("quizforge-official", gateway.generate(input()).getString("provider")); assertEquals(1, requests.size()); assertTrue(official(requests.get(0)));
+    }
+
+    @Test public void freeQuotaTimeoutsAndNetworkFailuresFallBack() throws Exception {
+        FakeHub hub = new FakeHub();
+        gateway = create((request, body, i) -> { if (official(request)) throw new java.io.IOException("synthetic offline"); return model(request, "{\"score\":2.5,\"feedback\":\"custom\"}"); });
+        gateway.attachHub(hub); gateway.update(config("synthetic-key").put("useOfficial", true));
+        assertEquals("openai-compatible", gateway.generate(input()).getString("provider")); assertEquals(2, requests.size());
+    }
+
+    @Test public void modelTestOnlyTestsTheCustomModelAndSourceChangesStopQueuedRequests() throws Exception {
+        FakeHub hub = new FakeHub();
+        gateway = create((request, body, i) -> model(request, i == 0 ? "{\"score\":2.5,\"feedback\":\"文字正常\"}" : "{\"score\":0,\"feedback\":\"WRONG\"}"));
+        gateway.attachHub(hub); gateway.update(config("synthetic-key").put("useOfficial", true));
+        gateway.testConnection();
+        for (Request request : requests) { assertFalse(official(request)); assertEquals("Bearer synthetic-key", request.header("Authorization")); }
+        String version = gateway.status().getString("configurationVersion");
+        gateway.update(new JSONObject().put("useOfficial", false));
+        rejects("AI_CONFIG_CHANGED", () -> gateway.generate(input().put("configurationVersion", version)));
+    }
+
+    @Test public void visionCheckToleratesOneMisreadCharacterLikeTheWeb() {
+        assertTrue(AiGateway.closeEnough("AB5DEF", "ABSDEF")); assertTrue(AiGateway.closeEnough("ab-sd ef", "ABSDEF")); assertTrue(AiGateway.closeEnough("ABSDE", "ABSDEF"));
+        assertFalse(AiGateway.closeEnough("A85DEF", "ABSDEF")); assertFalse(AiGateway.closeEnough("WRONG", "ABSDEF")); assertFalse(AiGateway.closeEnough("", "ABSDEF"));
     }
 }
