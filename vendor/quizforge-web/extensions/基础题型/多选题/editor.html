@@ -1,0 +1,20 @@
+<main class="single-choice-card authoring">
+  <header class="question-header">
+    <span class="question-type">多选题</span>
+    <label class="question-score editable-score"><input id="edit-max-score" type="text" inputmode="decimal" maxlength="12" aria-label="满分" title="满分须大于 0，最多 100000" autocomplete="off"><span>分</span></label>
+  </header>
+  <section class="edit-section">
+    <div class="section-label">题干</div>
+    <div id="edit-stem" class="editable-field" tabindex="0" role="button" aria-label="编辑题干"></div>
+  </section>
+  <section class="edit-section">
+    <div class="section-label">选项</div>
+    <div id="option-editors" class="options"></div>
+    <button id="add-option" class="add-option" type="button">＋ 添加选项</button>
+  </section>
+  <section class="edit-section">
+    <div class="section-label">答案与解析</div>
+    <div id="edit-assessment" class="editable-field" tabindex="0" role="button" aria-label="编辑答案与解析"></div>
+  </section>
+  <p id="error" class="error" role="alert" hidden></p>
+</main>

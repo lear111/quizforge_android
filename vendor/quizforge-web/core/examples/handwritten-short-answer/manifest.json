@@ -1,0 +1,14 @@
+{
+  "id": "quizforge.handwritten-short-answer",
+  "version": "1.3.0",
+  "name": "手写简答题",
+  "description": "API 1.5 答题范围示例：与草稿共用一个书写图层，框内文字与手写用于评分。",
+  "requiresApi": {"major":1,"minMinor":5,"capabilities":["practice","editor","editor-drafts","score","resources","lifecycle","answer-state","manual-review","ai-grading","answer-areas"]},
+  "entry": "practice.html",
+  "script": "practice.js",
+  "style": "practice.css",
+  "rules": "rules.js",
+  "questionSchema": "question.schema.json",
+  "answerSchema": "answer.schema.json",
+  "examples": "examples/bank.json"
+}

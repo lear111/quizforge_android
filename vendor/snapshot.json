@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "source": "quizforge_web working tree",
+  "sourceRevision": "b8e0c0683edeb3067b739d0dd474fb4504770c7a",
+  "includesWorkingTreeChanges": true,
+  "capturedAt": "2026-10-22T02:22:24.178Z",
+  "files": [
+    {
+      "path": "core/web/ai/ai-client.js",
+      "sha256": "4336f955882d881ff45af4889a6eaf6e9a3107b6a31f6ab518024d67c17a2e7d",
+      "bytes": 2417
+    },
+    {
+      "path": "core/web/ai/ai-settings.css",
+      "sha256": "a565534675ced533919b400466f4e892bc73378d33d302962a3a5091bc1a30cd",
+      "bytes": 2184
+    },
+    {
+      "path": "core/web/ai/ai-settings.js",
+      "sha256": "3a680c9048cd14e16fc0777e6f1ad27e360ad05efe72cae8e25b9142814bb960",
+      "bytes": 8050
+    },
+    {
+      "path": "core/web/app.js",
+      "sha256": "37d3657f382d3708e3ff695ab73859c10df3fb905b7a86c82ca6eda4ffff14cf",
+      "bytes": 73250
+    },
+    {
+      "path": "core/web/assets/backgrounds/dawn-lake.svg",
+      "sha256": "aa281e5c214ed1526b75a2292667ccd0ef5889108ff6436e83f69c4030f04694",
+      "bytes": 4600
+    },
+    {
+      "path": "core/web/assets/html2canvas-1.4.1.min.js",
+      "sha256": "e87e550794322e574a1fda0c1549a3c70dae5a93d9113417a429016838eab8cb",
+      "bytes": 198689
+    },
+    {
+      "path": "core/web/assets/html2canvas-LICENSE.txt",
+      "sha256": "86200ce4e92d9a22c41c8647a55f7a5fddff304ff89b4d36ecc699ed8c123d2c",
+      "bytes": 1061
+    },
+    {
+      "path": "core/web/assets/quizforge-icon-192.png",
+      "sha256": "a164e14f9c2e947fb9a46ed17f3b4cb540a72c91b571cef230fc01427679d116",
+      "bytes": 21788
+    },
+    {
+      "path": "core/web/assets/quizforge-icon.png",
+      "sha256": "eb89695b4e05f19ea73086874258c2f86330e4d160508354f5f0db9609e14bdf",
+      "bytes": 28622
+    },
+    {
+      "path": "core/web/assets/quizforge-icon.svg",
+      "sha256": "2f30f7908ae275dd583646a6bde273592cbfc5f987bd3d7cc8f232303c93d73c",
+      "bytes": 676
+    },
+    {
+      "path": "core/web/assets/quizforge-maskable-192.png",
+      "sha256": "4c61bc628484cf304b9b1a8eea52117d6437cadad02d77a0b678411ddedd0e49",
+      "bytes": 18891
+    },
+    {
+      "path": "core/web/assets/quizforge-maskable-512.png",
+      "sha256": "c4f5f6482a594bccca6e1c8399391db10132496e6565dada7d5a511fe1b7d90b",
+      "bytes": 96321
+    },
+    {
+      "path": "core/web/assets/quizforge-maskable.svg",
+      "sha256": "3a088951404e0b7b1535b55aad30e552ac1fe2a06284a1942fe5e0c754d21e7f",
+      "bytes": 850
+    },
+    {
+      "path": "core/web/assets/quizforge-touch-icon.png",
+      "sha256": "6532a9923c593998f15aec827b50f0a5c5c430b1e6fd6b2bf05afdd5aa1b043f",
+      "bytes": 8140
+    },
+    {
+      "path": "core/web/bridge/api-bridges.js",
+      "sha256": "997be54200c37b9b1ca0a7010cfd6c0eca61ee38d3a7d0c6ddb49a71faa71c77",
+      "bytes": 2406
+    },
+    {
+      "path": "core/web/bridge/api-v1.js",
+      "sha256": "4d57101c56038a1a9fe6535028a4e5800d37fb15b71672d0f14ccf18639544a9",
+      "bytes": 17275
+    },
+    {
+      "path": "core/web/bridge/extension-pages.js",
+      "sha256": "0dd8e717212c0a7ddd557225e2a21997c4e07274da9151be5ea8fa8cdf1d3d34",
+      "bytes": 2702
+    },
+    {
+      "path": "core/web/bridge/extension-requests.js",
+      "sha256": "4d24044432d708111ac3cc71bacdfbc9602fd7cbda854dd2b003598884874a98",
+      "bytes": 4539
+    },
+    {
+      "path": "core/web/bridge/frame-capture.js",
+      "sha256": "609f8519322009131d85f17ee5ecc4c3ed9c45e2c566a522127d7cc0514b0a00",
+      "bytes": 6456
+    },
+    {
+      "path": "core/web/bridge/frame.js",
+      "sha256": "ea1f7ddcdd42e90e653eec8cad35eaa517edddd07544cf640de4b188fc5e93fe",
+      "bytes": 21389
+    },
+    {
+      "path": "core/web/bridge/page-assets.js",
+      "sha256": "32986945636023288ec80be57899c9c1288ce3b2bf57437777dbd55ca168a2d2",
+      "bytes": 1648
+    },
+    {
+      "path": "core/web/development/development-preview.js",
+      "sha256": "e361c81e9a073220ef625fe4b6de951037c913800d5a14ebd790e55b968f1426",
+      "bytes": 3954
+    },
+    {
+      "path": "core/web/development/development-publish.js",
+      "sha256": "738f2d163993bf6b0e1dbda44331d11bc12a98edab0e967ad20f92aa2bc66444",
+      "bytes": 2642
+    },
+    {
+      "path": "core/web/development/development-settings.js",
+      "sha256": "81a311dc408fa992dc9f8e351a00a62214bd0474bf05d08ec644f1ed9d2c8226",
+      "bytes": 3646
+    },
+    {
+      "path": "core/web/development/development-watch.js",
+      "sha256": "22eb8e8866ec3d45e8e4f50328c806f6ed038059078fcb1c49b387e55ba8e064",
+      "bytes": 1695
+    },
+    {
+      "path": "core/web/development/development.css",
+      "sha256": "a5f9e48b8a803c1d95c8dbd4fe93a5fd09897dec11c1c5e09f76331ac0c9f431",
+      "bytes": 2724
+    },
+    {
+      "path": "core/web/draft/answer-ink.js",
+      "sha256": "5c8a8e3f7990657c20b492b5532bd04f2a772e05cda853b2950bd436dc9aa413",
+      "bytes": 8693
+    },
+    {
+      "path": "core/web/draft/camera.css",
+      "sha256": "4575b2437f5619383e7fdec2188e8f455018e323d984a7896d24a80656aabf91",
+      "bytes": 1585
+    },
+    {
+      "path": "core/web/draft/canvas-space.js",
+      "sha256": "4c1434b88aac0ff6500a27eb14994a93060078d7b095b259b69c998c34604d36",
+      "bytes": 776
+    },
+    {
+      "path": "core/web/draft/draft-fullscreen.js",
+      "sha256": "a649bae905287b10abf9a2485cf0408b5c997ec645ed6ab21453b082dd7d5365",
+      "bytes": 3885
+    },
+    {
+      "path": "core/web/draft/view-camera.js",
+      "sha256": "3011f56b6430fa64c2bfcf1b532d0cb55551277248a9a0f8809f5606a5480f03",
+      "bytes": 1183
+    },
+    {
+      "path": "core/web/draft/whiteboard-dock.js",
+      "sha256": "829b249ddfe7ff9d8371d20bf5c717d71510da2bc1553ad3cae3f1d2cc3b264c",
+      "bytes": 7816
+    },
+    {
+      "path": "core/web/draft/whiteboard-model.js",
+      "sha256": "c6e625d6bcbdd1b1e9c18b30eb6f0154dc7d3918ac4f22540c028946859527ba",
+      "bytes": 10939
+    },
+    {
+      "path": "core/web/draft/whiteboard-selection.js",
+      "sha256": "e9d177f31d9b4899e6d02804b0635859bb4ed8e4466cedd83d08a6d775bf6553",
+      "bytes": 1694
+    },
+    {
+      "path": "core/web/draft/whiteboard.css",
+      "sha256": "a3dc1a9e637172d590e581df9dcd449f89f45bb42b405bee09281ea20cbfc585",
+      "bytes": 11437
+    },
+    {
+      "path": "core/web/draft/whiteboard.js",
+      "sha256": "d65dc3314428a83f4d130857499c4a91bac965da7d2ec9ea986cb0f54a3aa289",
+      "bytes": 65659
+    },
+    {
+      "path": "core/web/editor/editor-navigation.css",
+      "sha256": "fd81a38a2658ab2c0a9b342ca4d098ae8e10acdb67c1f23875278d0d375769b8",
+      "bytes": 650
+    },
+    {
+      "path": "core/web/editor/editor-navigation.js",
+      "sha256": "06093f027e77d25608b9550a6bd1380d509bf15448dca8542cb613e1c0d21efc",
+      "bytes": 1984
+    },
+    {
+      "path": "core/web/editor/editor-session.js",
+      "sha256": "ec26b879a32d0427b0bbd43556dcbea433ee7e4e23400fffaf48df8b84364511",
+      "bytes": 1466
+    },
+    {
+      "path": "core/web/exam/exam-mode.css",
+      "sha256": "9059b3d5d285673181add37ba3f1cc627b8ce7df946d069fb2339a5e0dab07af",
+      "bytes": 5134
+    },
+    {
+      "path": "core/web/exam/exam-mode.js",
+      "sha256": "63b5ca6b7681e37613f655973fa3bec683e9e675207152cd2499afa2d2f95065",
+      "bytes": 12259
+    },
+    {
+      "path": "core/web/favicon.ico",
+      "sha256": "1cda77e0b869903fc29f2109d0a15db26533bf52ba320f2e78acd47be75d2286",
+      "bytes": 6405
+    },
+    {
+      "path": "core/web/history/history-view.js",
+      "sha256": "1ebdc361171c1f76d4800ca6ab930dabbc21e43521a00417a2836ece839c584d",
+      "bytes": 2658
+    },
+    {
+      "path": "core/web/index.html",
+      "sha256": "0fab590ff9031c119b0a449859fb196a9902002a535415b2ee77b9ea737228b6",
+      "bytes": 26301
+    },
+    {
+      "path": "core/web/library/extension-groups.js",
+      "sha256": "95072dcac39ad8e69fd56c0e68a84ba94c28354ee16f4aac45cded1ddf13853a",
+      "bytes": 645
+    },
+    {
+      "path": "core/web/library/library-index-client.js",
+      "sha256": "d7fa2beb3c9a4f68badbed6c8e24dd94f2c9e080211017de09ab59c50319745e",
+      "bytes": 667
+    },
+    {
+      "path": "core/web/library/library-management.css",
+      "sha256": "3b3d304f24bb1cda235d7b9973ca09e26641bc90baba635eeaf96598e628da9e",
+      "bytes": 6081
+    },
+    {
+      "path": "core/web/library/library-management.js",
+      "sha256": "af2fbaa4ad2aba0e4c4831a737176dd69b877e214ac7ac2ebf144cb8059d0c77",
+      "bytes": 5335
+    },
+    {
+      "path": "core/web/library/library-resize.js",
+      "sha256": "6706226a779c2e063dadde691ea146bb08a942bad94381b3603e3eab28a60262",
+      "bytes": 4702
+    },
+    {
+      "path": "core/web/library/library-transfer.js",
+      "sha256": "67b7d21ce4c78c1efbce1e7d5f9adb150cc713076e246b985c15f765cdbdfdf1",
+      "bytes": 3389
+    },
+    {
+      "path": "core/web/library/library-view.js",
+      "sha256": "8d4b74525381f262a87d5d4d568ca124090d4bb786bfb2b4cfacb2e0f99d7368",
+      "bytes": 5443
+    },
+    {
+      "path": "core/web/library/native-import.js",
+      "sha256": "3c612351c7d2534967ad31221f210d21a3263b652d1932521bbecd34faf6d120",
+      "bytes": 535
+    },
+    {
+      "path": "core/web/manifest.webmanifest",
+      "sha256": "f62db06b60343b3aff0b543fff016d99b99ae7c62bae6df0ed49269a732ce851",
+      "bytes": 779
+    },
+    {
+      "path": "core/web/outline/outline-groups.js",
+      "sha256": "0ee546f954deb5ec17c5608274886dd5792ca95e9851b5cf92ee2347fe4749d9",
+      "bytes": 761
+    },
+    {
+      "path": "core/web/outline/outline-navigation.js",
+      "sha256": "e92555b93310f2eb2c1779d47e1dad03d0dea2d27defa2047cd39bf10b72154b",
+      "bytes": 1285
+    },
+    {
+      "path": "core/web/outline/outline-view.js",
+      "sha256": "74c00f774ccb779e22bed59903fff742663f4c747678ff0120c4625b413871e4",
+      "bytes": 4543
+    },
+    {
+      "path": "core/web/practice/answer-preview.js",
+      "sha256": "1cffaa7a8c23ba788cc2bdb8f226262818948cc0ef3780653e8fc3006668863a",
+      "bytes": 2724
+    },
+    {
+      "path": "core/web/practice/collection-loading.js",
+      "sha256": "9ad7d5f867848fded241e6e7287644dc3aaa780ff5c514cbc5849e60e9f3bdf8",
+      "bytes": 784
+    },
+    {
+      "path": "core/web/practice/practice-context.js",
+      "sha256": "48b3bbbe7345bae7c14074f361e8b0b37b8a234031146d8a73b1c10a27c1f841",
+      "bytes": 3187
+    },
+    {
+      "path": "core/web/practice/practice-summary.css",
+      "sha256": "dba40c529c84069e04e82dd303da290fc3bd08801219f3e0441692ec9432fa19",
+      "bytes": 2831
+    },
+    {
+      "path": "core/web/practice/practice-summary.js",
+      "sha256": "7312cd6d24efb6277eaa109dc0e53b596809370eeb1d72366b34955539a8097d",
+      "bytes": 5407
+    },
+    {
+      "path": "core/web/practice/question-cache.js",
+      "sha256": "b6756ececa30a42f776376f7470001ba463da1e372274d58fd8eaa53ad629d08",
+      "bytes": 4385
+    },
+    {
+      "path": "core/web/practice/question-layout.js",
+      "sha256": "08e7438ffd2ce3917495780d0862f70db3e212bf72cc645e69669aa7b08a4490",
+      "bytes": 3226
+    },
+    {
+      "path": "core/web/practice/question-navigation.js",
+      "sha256": "b206b08189d8097c6aedd1ada387b2152495c5320d128c95c7ad34ba1320a7ad",
+      "bytes": 2257
+    },
+    {
+      "path": "core/web/practice/save-recovery.js",
+      "sha256": "97eddcf28559b24b1785aa45fa3ce94741e9a6b28711ec4b512fcb1b3dcaa1cf",
+      "bytes": 2635
+    },
+    {
+      "path": "core/web/shared/answer-area-channel.js",
+      "sha256": "fb1cce4829f290778fb6def70dcf20c97f1a43f4dd61d00d7112a740450a4adb",
+      "bytes": 1185
+    },
+    {
+      "path": "core/web/shared/api.js",
+      "sha256": "4ab32dcf7d7989d046d042229ab96615e5f3d0451f2a74254f29bb3ee2290407",
+      "bytes": 4268
+    },
+    {
+      "path": "core/web/shared/write-queue.js",
+      "sha256": "250920af6d96f4cbbbeafa5407e762653046832cec60af3045092e0f77da7440",
+      "bytes": 1933
+    },
+    {
+      "path": "core/web/shell/app.css",
+      "sha256": "a0cbfcf167290b4c551e242c9bb5455dea4e1425a6b330dd9abd182194bfafc9",
+      "bytes": 10297
+    },
+    {
+      "path": "core/web/shell/appearance.js",
+      "sha256": "b9d7fa24f700aa0463d8f0d70eb42729269ee1f2fc648aab71fad4c7f5e438bd",
+      "bytes": 10361
+    },
+    {
+      "path": "core/web/shell/network-settings.css",
+      "sha256": "b84c1dba50494951a0aa49b6834406f9c0e79f57e455efea3682bbd86651cf04",
+      "bytes": 7461
+    },
+    {
+      "path": "core/web/shell/network-settings.js",
+      "sha256": "e323120e395fcce71aa7d874f417d12376b7cf4f9e113de58182ffeb559cf321",
+      "bytes": 13612
+    },
+    {
+      "path": "core/web/shell/refinements.css",
+      "sha256": "53ea20e351c6aa3653d9d5c0d49a8cca77ea169dde4b2235732eeda1c2f6cf29",
+      "bytes": 12577
+    },
+    {
+      "path": "core/web/shell/themes.css",
+      "sha256": "7bf80af0d414188618b3f0c925a15f0f820c320c8ea0422db350766b8c8698d7",
+      "bytes": 6687
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/README.md",
+      "sha256": "2b678be85c7111672cf180dfafd50f91aa694a2265f76c3065bf986b6f56c6da",
+      "bytes": 2563
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/THIRD_PARTY_NOTICES.md",
+      "sha256": "ea6f2914130502e758825ed535c45bc098201ca5f00a3bea7f2a4d7d1d9935bb",
+      "bytes": 18873
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/manifest.json",
+      "sha256": "77b222b57baea912621dba8071bd79e9bf81229538556cac418441018beb855b",
+      "bytes": 157
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/richtext-editor.js",
+      "sha256": "3e0dca4c9ebeb0512311f5a50c0873865873a6d38308fc7a9b3ca76d646b88bf",
+      "bytes": 390913
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/richtext.css",
+      "sha256": "477e7c0106c387fb1e1ceedb2a173d6d0ee7b08b291cfea7ffea7ec20dfbe061",
+      "bytes": 1820
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/richtext.js",
+      "sha256": "8d3cd1719d12144f99c876e48c2c57cf2a220f89d96b13c0e65fda4d33e5b1bb",
+      "bytes": 6605
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/src/document.js",
+      "sha256": "b7b23ae8991490fc577aedc634a716caab8a0ffa6fe554f27a08930ef18de2b0",
+      "bytes": 5166
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/src/editor.js",
+      "sha256": "34cb8afdead079bfb3e642aff38e6cbdaf5c6dfdd69c8203200df65de7b073c5",
+      "bytes": 6354
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/src/render.js",
+      "sha256": "0532c2fe884472fadf84c6e8282c20f84fffc69ae8c2cd8e7efd1c818b40fb02",
+      "bytes": 2274
+    },
+    {
+      "path": "core/shared/richtext/1.0.0/src/static.js",
+      "sha256": "a6b09a203e7c7c10df98b6a01db1622e491f194c04ce8baf2cbb583eb090eb86",
+      "bytes": 2218
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/README.md",
+      "sha256": "5aa9ab93ad29b16847a0bcd54976b0bd5ce43fbb338f4f742c9780e26e27f36f",
+      "bytes": 1383
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/THIRD_PARTY_NOTICES.md",
+      "sha256": "6671cc65984edb5d9bd44f040403b57c9a17f999e0cfa484cc722f809e9cc55a",
+      "bytes": 21200
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/richtext-editor.js",
+      "sha256": "75bd60342b1acd0010371587721f66f32cbf527bd3060c17f733ef02e455fc6d",
+      "bytes": 742338
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/richtext.css",
+      "sha256": "0aaab05842d0268e126d8875907d8cc2bf131aee19cf84a9db116a82a6a9a678",
+      "bytes": 7031
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/richtext.js",
+      "sha256": "b96eb3120c874e4fbdeb422aa7c7c01419aa28a7313e3d0c1c752d6090c5be09",
+      "bytes": 276916
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/document.js",
+      "sha256": "1c3786a8e43dc5b249c6e3b68d8fa8d7f124b7c5037c223baa9ec69fd456664d",
+      "bytes": 10628
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/editor.js",
+      "sha256": "18d89033deee0885534ebccc709bf9c6caf92636cdd2c6397df6564894dec2ad",
+      "bytes": 29718
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/image-view.js",
+      "sha256": "42c0be87f9bdd23b92c1103bdd79ac2ba9aaa36ab0b1506f4f8f65d72f998b57",
+      "bytes": 6569
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/photo.js",
+      "sha256": "2b8ffcbe89de2b187a1f188a6ca4504c89d31d04009b164179f6e038d2c4055b",
+      "bytes": 2964
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/render.js",
+      "sha256": "5905f76a2e2a037586f9b20389e2591188380ad5ab114247662855469964ea87",
+      "bytes": 5100
+    },
+    {
+      "path": "core/shared/richtext/1.1.3/src/static.js",
+      "sha256": "a0420d84a45aae13b8ad403a94f69337d9e1f2e58fe310b11eeb1d945b0ab2d4",
+      "bytes": 3075
+    },
+    {
+      "path": "core/shared/richtext/service.json",
+      "sha256": "e981736a8d022303538a79324b7f3e6c5934566349f2273bd5748238e02cb07b",
+      "bytes": 882
+    },
+    {
+      "path": "core/shared/answer-area/1.0.0/component.js",
+      "sha256": "0aa5ab53b9d2c44da7db540d3c4af8b18e7b65e0bfcd656b4f14478d6a4f34a6",
+      "bytes": 13612
+    },
+    {
+      "path": "core/shared/answer-area/1.0.0/model.js",
+      "sha256": "7857e709e6cc6f3d201a8aeb49d23c082347cf12e209cdd67f7cbf55e4258da0",
+      "bytes": 3979
+    },
+    {
+      "path": "core/shared/answer-area/1.1.0/component.js",
+      "sha256": "49e5275adcf4220eda4547c8bb7c43eb4b5403022caec89b8c0327862737105e",
+      "bytes": 17008
+    },
+    {
+      "path": "core/shared/answer-area/1.1.0/model.js",
+      "sha256": "ec55fdff144a375ca8becd509a68be487e60452be7d97062a8ebaa25df68174f",
+      "bytes": 4140
+    },
+    {
+      "path": "core/shared/answer-area/1.2.0/component.js",
+      "sha256": "d902fcd17eb687b40e7265b7106e70fd2dd645474957a7e54dfa6b35b1380859",
+      "bytes": 17120
+    },
+    {
+      "path": "core/shared/answer-area/1.2.0/model.js",
+      "sha256": "b672f0f0b252ea73879e89d6b54cd3cd33707088943c08aec631ee7d679c2d1a",
+      "bytes": 5322
+    },
+    {
+      "path": "core/shared/answer-area/1.3.0/component.js",
+      "sha256": "404e18ffca5e69cd2c950db8146b5fb7def587afa16a1335e96704967528b62f",
+      "bytes": 8227
+    },
+    {
+      "path": "core/shared/answer-area/1.3.0/model.js",
+      "sha256": "388ae34d4db3df715fb7b487ede57b62c723d7d4c280c9a085f9299e3a8eb299",
+      "bytes": 6194
+    },
+    {
+      "path": "core/shared/answer-area/1.3.1/component.js",
+      "sha256": "dbd3b181b4bd6eb482732a19c5038fdfc0f8b4b3f5c48a7a4b12511e5390caa8",
+      "bytes": 9161
+    },
+    {
+      "path": "core/shared/answer-area/1.3.2/component.js",
+      "sha256": "a7c1e492fc8f3ea14f7c7b2be83c40c675730b1843e385cfbc17cf141d41733c",
+      "bytes": 9505
+    },
+    {
+      "path": "core/shared/answer-area/1.4.0/component.js",
+      "sha256": "8a18b0d50e85f8888826ae61e0255889b1c6f2bea8940168eab7a151720e5f72",
+      "bytes": 21810
+    },
+    {
+      "path": "core/shared/answer-area/1.4.0/model.js",
+      "sha256": "63dfc5e25e6b1a23581a0a684ad00fad8a9b1cb7718ff4c1cb8e80d607b7b11c",
+      "bytes": 7424
+    },
+    {
+      "path": "core/shared/answer-area/1.4.1/component.js",
+      "sha256": "8466570b2b03033b7cffe2b864a1b51c571110c5e0288e6d4c58cf1247383b42",
+      "bytes": 27605
+    },
+    {
+      "path": "core/shared/ink/1.0.0/renderer.js",
+      "sha256": "b23f8516fce7d2f7c400af092c5c734995570ec6d22109293ca7ac5938ad4b4c",
+      "bytes": 1032
+    },
+    {
+      "path": "core/server/host/extensions/answer-area-component.js",
+      "sha256": "0ea87a2064ab6ba32b3251cf78c9179638ba482653a653236a6231627370ace7",
+      "bytes": 1378
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/answer.schema.json",
+      "sha256": "ba05504c00621becfe6703ad3bf88340c09a9cb9d819b37e8d6606951c16429c",
+      "bytes": 3823
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/editor.css",
+      "sha256": "5163812b1c2939c15196b14800bc0b145939343613d68e345e283dce75bec2a0",
+      "bytes": 1174
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/editor.html",
+      "sha256": "bfcbf7d904f9ef803d8feb93823d13a71a2ab36f0f21af454cd76a960126bdfb",
+      "bytes": 859
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/editor.js",
+      "sha256": "f9f48e243cb9b742a78f3704803f4fad06740b5e4b7aa1004bc474c958f8f280",
+      "bytes": 3611
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/editor.json",
+      "sha256": "5e3aa79fde47dfcbeec9736298dd624cb7e03e41e1ae95540ae7f352f85cf17a",
+      "bytes": 66
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/examples/bank.json",
+      "sha256": "ec5f67970ddb1ae137ea945febd3ca83b61e7906c60ea00178ed2aff4c3d720d",
+      "bytes": 1391
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/manifest.json",
+      "sha256": "60b967741fb6a53e15adb3dbccc094c836968c03bb323e555a98aabc71e3c7a3",
+      "bytes": 634
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/practice.css",
+      "sha256": "08adbc2ae6c920647635a9808c1e81c43b321d9ab620be33482a551855125694",
+      "bytes": 949
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/practice.html",
+      "sha256": "376e3c9f26ca0b10df80e308a28c11bcd01f2cda7adc2ec71d177f562ba28f30",
+      "bytes": 745
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/practice.js",
+      "sha256": "9404941627e470eab4b013348992bcf835ab598fbe89200bbe22baebf9f6fe5c",
+      "bytes": 4894
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/question.schema.json",
+      "sha256": "fd170a6efebd83695512850940f5c47ea7f6c0911c8e8005a53d73317dcb2fef",
+      "bytes": 663
+    },
+    {
+      "path": "core/examples/handwritten-short-answer/rules.js",
+      "sha256": "12a5c83c4930767f255bb18188c9ccff0168386ca8ae3bed0a2a60f960288461",
+      "bytes": 2465
+    },
+    {
+      "path": "extensions/基础题型/判断题/answer.schema.json",
+      "sha256": "4b54c76fafe2243c872540f12e2eedce88352a82350e45785383e14484cda93b",
+      "bytes": 335
+    },
+    {
+      "path": "extensions/基础题型/判断题/editor.html",
+      "sha256": "a561e2c621d1dc031d5917bd029f0afcc69aa4fe0e4ff3839e277b552397a318",
+      "bytes": 1104
+    },
+    {
+      "path": "extensions/基础题型/判断题/editor.js",
+      "sha256": "0be51738a3814a56d6b50417ed2a14dde39cb7d87117641780d5c6e8fd1242da",
+      "bytes": 9235
+    },
+    {
+      "path": "extensions/基础题型/判断题/editor.json",
+      "sha256": "4ac4fa6cdba8e6eab090548e50f91bc0e45132eacfa4dac95d497ee09b2b35ab",
+      "bytes": 81
+    },
+    {
+      "path": "extensions/基础题型/判断题/examples/bank.json",
+      "sha256": "7ca0ecc13d18f6b5597904550a84ac0a1b05896bb2037a47d4e2247e285a9e4b",
+      "bytes": 3381
+    },
+    {
+      "path": "extensions/基础题型/判断题/manifest.json",
+      "sha256": "281601a9a8bdb7fca1aecc1331213147490384f50c78d94f19ecaa00f00070aa",
+      "bytes": 925
+    },
+    {
+      "path": "extensions/基础题型/判断题/practice.css",
+      "sha256": "e321927b8b9cb787a7d343ad2c24f4f1acba57628b73377e7c679a61caa1bde4",
+      "bytes": 10448
+    },
+    {
+      "path": "extensions/基础题型/判断题/practice.html",
+      "sha256": "ad65a9c2e7cf3d5f59ae3cd0a866875e5e83a3b31d927f6d199df6894d191a73",
+      "bytes": 775
+    },
+    {
+      "path": "extensions/基础题型/判断题/practice.js",
+      "sha256": "7218372422c4ec375512445dba96dc7803329a66c3a581793ef5341442a9dccb",
+      "bytes": 8483
+    },
+    {
+      "path": "extensions/基础题型/判断题/question.schema.json",
+      "sha256": "cde89c4a8a6507f3c3a1c310824b45569f955500cd7be53ab8d7bad90e147641",
+      "bytes": 2790
+    },
+    {
+      "path": "extensions/基础题型/判断题/rules.js",
+      "sha256": "2d45222456856acdea73aa6aec42e8a8ec5afa2c3843cdf9dff75cb648cf551d",
+      "bytes": 4347
+    },
+    {
+      "path": "extensions/基础题型/单选题/answer.schema.json",
+      "sha256": "7d4b83bdc9afcececafaf76e33706897b0eaa338760b699d5f50144b6d20c44e",
+      "bytes": 276
+    },
+    {
+      "path": "extensions/基础题型/单选题/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/单选题/editor.html",
+      "sha256": "1ffe5c958098fc774f279184fec6674a0848e5ecff49512136fe777961096c7f",
+      "bytes": 1079
+    },
+    {
+      "path": "extensions/基础题型/单选题/editor.js",
+      "sha256": "a9baaa2a1cb3a3f92a5ed13538f90b25e1100e2662eac1280772f2620fe6ca3d",
+      "bytes": 9778
+    },
+    {
+      "path": "extensions/基础题型/单选题/editor.json",
+      "sha256": "422d8a10c97bbfc209cab120749864e297c4b44e49a46e398912d6ce87017d12",
+      "bytes": 68
+    },
+    {
+      "path": "extensions/基础题型/单选题/examples/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/单选题/examples/bank.json",
+      "sha256": "b90086958ce20165f09d5da359c1f85582baa425970c37edf5aa5fec3d86aa5b",
+      "bytes": 29631
+    },
+    {
+      "path": "extensions/基础题型/单选题/manifest.json",
+      "sha256": "41a9855a4e83f9d02955c709944a47183499d789b7d87ae4735e38262e1ff8b1",
+      "bytes": 946
+    },
+    {
+      "path": "extensions/基础题型/单选题/practice.css",
+      "sha256": "e321927b8b9cb787a7d343ad2c24f4f1acba57628b73377e7c679a61caa1bde4",
+      "bytes": 10448
+    },
+    {
+      "path": "extensions/基础题型/单选题/practice.html",
+      "sha256": "edfd553e5053621997c03c50c1257063ea600d85d0907b2779f435404574e08d",
+      "bytes": 814
+    },
+    {
+      "path": "extensions/基础题型/单选题/practice.js",
+      "sha256": "df67b20c6031f1197ffb49d5a513e1f9176c79303989b2ab3e2771eabe92ad39",
+      "bytes": 8479
+    },
+    {
+      "path": "extensions/基础题型/单选题/question.schema.json",
+      "sha256": "1e70adc136b6eaa1c191d97357444629a048eed8e12f86f8306026f1587414a2",
+      "bytes": 3324
+    },
+    {
+      "path": "extensions/基础题型/单选题/rules.js",
+      "sha256": "63364730efe9c814d5b43dfe23dc7557134bf56657ee0eeccda853d27e6b1e10",
+      "bytes": 4343
+    },
+    {
+      "path": "extensions/基础题型/多选题/answer.schema.json",
+      "sha256": "25b019c2d5b07842fcee1d50f17494d6e06d03ef88fd908659ed4cabac9864ad",
+      "bytes": 406
+    },
+    {
+      "path": "extensions/基础题型/多选题/editor.html",
+      "sha256": "0de855983c18665a5f2ec835b0d5ddec6d1b0eccb5823a7e5605bb5a09343834",
+      "bytes": 1079
+    },
+    {
+      "path": "extensions/基础题型/多选题/editor.js",
+      "sha256": "a950c4e0e5286a7e2ab407c20d7cd8e7a3bee01ea087faccca5ec20e6eefe97e",
+      "bytes": 9426
+    },
+    {
+      "path": "extensions/基础题型/多选题/editor.json",
+      "sha256": "4ac4fa6cdba8e6eab090548e50f91bc0e45132eacfa4dac95d497ee09b2b35ab",
+      "bytes": 81
+    },
+    {
+      "path": "extensions/基础题型/多选题/examples/bank.json",
+      "sha256": "a68e1d8f57b028e6e03baf2dbf8dd46ca60dbc7b2395af78a4a5ae5ad25b4466",
+      "bytes": 17237
+    },
+    {
+      "path": "extensions/基础题型/多选题/manifest.json",
+      "sha256": "490079a59973f9ff341cc0d951e58ae6e707824da7785de7a91581ffaf567745",
+      "bytes": 936
+    },
+    {
+      "path": "extensions/基础题型/多选题/practice.css",
+      "sha256": "e321927b8b9cb787a7d343ad2c24f4f1acba57628b73377e7c679a61caa1bde4",
+      "bytes": 10448
+    },
+    {
+      "path": "extensions/基础题型/多选题/practice.html",
+      "sha256": "c6bc2bd0af798c2e1ea556759f524b3378633192cbb9ec8dab9ff62061dcc44c",
+      "bytes": 752
+    },
+    {
+      "path": "extensions/基础题型/多选题/practice.js",
+      "sha256": "c361daad011bd9c11b65ad68eb59fb43e33a271192b4d16c23860baa82d3b7ec",
+      "bytes": 8481
+    },
+    {
+      "path": "extensions/基础题型/多选题/question.schema.json",
+      "sha256": "7a95aeb6150f1f1e473463b5e76a34dcd133468f40d499679699716ca7ab624d",
+      "bytes": 3445
+    },
+    {
+      "path": "extensions/基础题型/多选题/rules.js",
+      "sha256": "99f15e5440f2ff069c4d5dc65aaf0ecb3d55ca0f55fa4860c0fe73164aca2e44",
+      "bytes": 4345
+    },
+    {
+      "path": "extensions/基础题型/简答题/README.md",
+      "sha256": "0dd963583f50a4d89e51ca0569cd424773fb45ffa0a1ecdf420a197a5bce1a04",
+      "bytes": 405
+    },
+    {
+      "path": "extensions/基础题型/简答题/answer.schema.json",
+      "sha256": "b1ecf00d40a36b8a2e6c3ca3e7f50821527c0a50956c4f5fefd140e922e7f5c5",
+      "bytes": 2644
+    },
+    {
+      "path": "extensions/基础题型/简答题/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/简答题/editor.html",
+      "sha256": "1c6ce0ac979b280dc5915e646180a1a27c6e1059ee7093ab6251274f53180d10",
+      "bytes": 866
+    },
+    {
+      "path": "extensions/基础题型/简答题/editor.js",
+      "sha256": "593d0fb27ef4ecfdadab50f740ffe068d6b53d35d9deb5aec0c1b6b50e0c8849",
+      "bytes": 11015
+    },
+    {
+      "path": "extensions/基础题型/简答题/editor.json",
+      "sha256": "422d8a10c97bbfc209cab120749864e297c4b44e49a46e398912d6ce87017d12",
+      "bytes": 68
+    },
+    {
+      "path": "extensions/基础题型/简答题/examples/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/简答题/examples/bank.json",
+      "sha256": "3b5d056df382dfff9789021071118e51c7fbc54d078c07dd682e938d2ee5d52f",
+      "bytes": 13753
+    },
+    {
+      "path": "extensions/基础题型/简答题/manifest.json",
+      "sha256": "d9207a1f81e36adf74ab2fecc37b61911d9e447d7dff1283b3ff85bcebc8986b",
+      "bytes": 1063
+    },
+    {
+      "path": "extensions/基础题型/简答题/practice.css",
+      "sha256": "be87aa6d2df72d74055a61278be4472e08a98aa40932483f3b59c82c946e3f4b",
+      "bytes": 10068
+    },
+    {
+      "path": "extensions/基础题型/简答题/practice.html",
+      "sha256": "cd6dff98853936fc318e27a79b4afc46ac244aa4532f897102962a62683207b4",
+      "bytes": 565
+    },
+    {
+      "path": "extensions/基础题型/简答题/practice.js",
+      "sha256": "2a6784498b6e8fb55854b43bbba6fc18f615c460c74adece6442027e86cb8573",
+      "bytes": 16198
+    },
+    {
+      "path": "extensions/基础题型/简答题/question.schema.json",
+      "sha256": "f2d486d1b120893e1ae1f590c30652a84838e53819b863387e470d1a53bb643a",
+      "bytes": 3389
+    },
+    {
+      "path": "extensions/基础题型/简答题/rules.js",
+      "sha256": "ff9d14fd2abb81e5936ba22844a05647c4c15f03e98b03821ce2b34dce339df6",
+      "bytes": 6633
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/README.md",
+      "sha256": "c64a38072186245fb7fee6d38602fdc54d331118da95bffe9a751a5a5a58b67b",
+      "bytes": 4495
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/answer.schema.json",
+      "sha256": "74375af8b74bb95d30b22cd31eeef143c274c80125bd63512658868fe8d4bb60",
+      "bytes": 6390
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/editor.html",
+      "sha256": "1c6ce0ac979b280dc5915e646180a1a27c6e1059ee7093ab6251274f53180d10",
+      "bytes": 866
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/editor.js",
+      "sha256": "bd68a9a97fa9806a375bfddd7e6d68ed7f2eba5318b6b43dc54cdbefe4c86a67",
+      "bytes": 14019
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/editor.json",
+      "sha256": "422d8a10c97bbfc209cab120749864e297c4b44e49a46e398912d6ce87017d12",
+      "bytes": 68
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/examples/assets/96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8.png",
+      "sha256": "96fbe7bbe9e76622b6236d0d0fbfddb92f022249ac38bdbbd908efd3bf3791a8",
+      "bytes": 3688
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/examples/bank.json",
+      "sha256": "03580b7b938d8d9d50213447e51e99c0debfef59c3ebf504a645707a14c9f282",
+      "bytes": 13776
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/manifest.json",
+      "sha256": "f38d4b386011b574fd2aff26fd4906fc2139773b1bbe9fc2040d5817cea41b47",
+      "bytes": 1147
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/practice.css",
+      "sha256": "43b0ec57c6215a994f75087e7d274bd6081885dd2371b42f571748c52851fed8",
+      "bytes": 11109
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/practice.html",
+      "sha256": "cd6dff98853936fc318e27a79b4afc46ac244aa4532f897102962a62683207b4",
+      "bytes": 565
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/practice.js",
+      "sha256": "1eb61b5c047e2466b42d5d0d104a3fb9f9a420549a7a0af75e81b24ba79f1677",
+      "bytes": 16180
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/question.schema.json",
+      "sha256": "676f6a2c891915869db272252136947c33f728f98b3cddb5e282c8f824272557",
+      "bytes": 3680
+    },
+    {
+      "path": "extensions/基础题型/简答题（答题区）/rules.js",
+      "sha256": "74de2853f6a2d6e1e0db47e1727502808679a483ebdabb4851763f1305aa4e00",
+      "bytes": 8711
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "38c17a06e1eab98d2f68edafea611a445cf71e4ffdd467279ba6a15e0a09727b",
+      "bytes": 1064
+    }
+  ]
+}

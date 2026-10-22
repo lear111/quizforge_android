@@ -1,0 +1,9 @@
+<main class="card">
+  <header><span>编辑简答题</span><span>保存后应用到题目</span></header>
+  <label>题目名称<input id="title" maxlength="300"></label>
+  <label>题干<textarea id="stem" rows="3" maxlength="10000"></textarea></label>
+  <label>参考答案<textarea id="reference" rows="3" maxlength="10000"></textarea></label>
+  <label class="score">满分<input id="maximum" type="number" min="0.5" max="100" step="0.5"></label>
+  <section><h3>答题区大小</h3><p class="hint">设置答题区默认高度。文字、图片和框内手写空间不足时自动向下增长，删除内容不自动缩短。各设备按固定原稿比例显示，页面整体滚动。保存题目设置会按编辑规则重置当前题的作答，已完成历史保留。</p><div id="area-settings"></div></section>
+  <p id="error" role="status"></p>
+</main>

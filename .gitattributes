@@ -1,0 +1,2 @@
+# Preserve exact source bytes, including the SHA-256 pinned Web snapshot.
+* -text

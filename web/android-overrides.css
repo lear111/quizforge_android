@@ -1,0 +1,3 @@
+/* The Android window already applies system-bar and IME insets.
+   Keep the original Web shell and let it fit a resized tablet window. */
+.app-shell{min-height:0}

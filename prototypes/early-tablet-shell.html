@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN" data-qf-theme="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6f7f9">
+  <title>QuizForge · 离线学习</title>
+  <link rel="stylesheet" href="./tablet.css">
+</head>
+<body>
+  <div class="app-shell">
+    <button class="drawer-scrim" id="drawer-scrim" aria-label="关闭题库列表" hidden></button>
+    <aside class="library-panel" id="library-panel" aria-label="我的题库">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">Q</span><div><strong>QuizForge</strong><span>把学习留在自己手里</span></div></div>
+      <div class="library-heading"><h2>我的题库</h2><span class="count-badge" id="bank-count">0</span><button class="icon-button mobile-only" id="close-library" aria-label="收起题库列表">×</button></div>
+      <button class="import-button" id="import-bank"><span aria-hidden="true">＋</span> 导入题库</button>
+      <div class="bank-list" id="bank-list" role="list" aria-label="已导入的题库"><div class="list-placeholder">正在读取本地题库…</div></div>
+      <div class="library-bottom"><span class="local-lock" aria-hidden="true">▣</span><div><strong>数据保存在本机</strong><span>答题与草稿无需网络连接</span></div></div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="workspace-title"><button class="icon-button menu-button" id="open-library" aria-label="打开题库列表">☰</button><span class="workspace-label">学习空间</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="current-bank-name" id="header-bank">选择题库，开始学习</span></div>
+        <span class="offline-badge"><span></span>离线可用</span>
+      </header>
+
+      <div class="error-banner" id="error-banner" role="alert" hidden><span id="error-text"></span><button id="error-retry" hidden>重试</button><button class="icon-button" id="dismiss-error" aria-label="收起提示">×</button></div>
+
+      <main class="main-content" id="main-content">
+        <section class="welcome" id="welcome">
+          <div class="welcome-art" aria-hidden="true"><div class="paper-lines"><i></i><i></i><i></i><i></i></div><span class="paper-check">✓</span></div>
+          <span class="eyebrow">YOUR OWN LEARNING SPACE</span>
+          <h1>随时打开，安心学习。</h1>
+          <p id="welcome-description">导入一份题库，就能在这里答题、写草稿、查看记录。<br>题库和练习都保存在这台设备上。</p>
+          <button class="primary-button" id="welcome-import">导入 .qbank 题库<span aria-hidden="true">↗</span></button>
+          <div class="welcome-features"><span>✦ 自定义题型</span><span>✎ 手写草稿</span><span>◷ 本地记录</span></div>
+        </section>
+
+        <section class="study-space" id="study-space" hidden>
+          <div class="study-header">
+            <div><span class="eyebrow" id="study-mode">自由练习</span><h1 id="bank-title"></h1><div class="study-subtitle"><span id="question-position"></span><span class="save-status" id="save-status" aria-live="polite">准备就绪</span></div></div>
+            <div class="study-actions"><button class="secondary-button" id="history-button"><span aria-hidden="true">◷</span>练习记录</button><button class="secondary-button" id="ink-toggle" aria-pressed="false"><span aria-hidden="true">✎</span>草稿纸</button><button class="primary-button" id="finish-button">结束练习</button><button class="secondary-button" id="leave-history" hidden>返回当前练习</button></div>
+          </div>
+
+          <div class="study-body">
+            <div class="question-and-ink" id="question-and-ink">
+              <section class="question-pane" id="question-pane" aria-label="当前题目">
+                <div class="question-heading"><div><span class="question-number" id="question-number">01</span><span id="question-title"></span></div><span class="question-state" id="question-state"></span></div>
+                <div class="extension-mount" id="extension-mount"></div>
+                <div class="question-loading" id="question-loading" hidden><span class="spinner" aria-hidden="true"></span><span>正在准备题目…</span></div>
+                <div class="subquestion-links" id="subquestion-links" aria-label="本题小问" hidden></div>
+              </section>
+
+              <section class="ink-panel" id="ink-panel" aria-label="手写草稿纸" hidden>
+                <div class="ink-panel-heading"><div><span aria-hidden="true">✎</span><strong>草稿纸</strong></div><span id="ink-save-status">跟随题目保存</span></div>
+                <div class="ink-toolbar" role="toolbar" aria-label="草稿工具">
+                  <button class="tool-button is-active" id="ink-pen" aria-label="画笔" aria-pressed="true">笔</button><button class="tool-button" id="ink-eraser" aria-label="擦除笔迹" aria-pressed="false">橡皮</button><button class="tool-button" id="ink-finger" aria-label="使用手指书写" aria-pressed="false">手指写</button><span class="tool-divider"></span>
+                  <button class="color-dot is-active" data-ink-color="#25324a" style="--ink-color:#25324a" aria-label="深蓝色笔" aria-pressed="true"></button><button class="color-dot" data-ink-color="#315de7" style="--ink-color:#315de7" aria-label="蓝色笔" aria-pressed="false"></button><button class="color-dot" data-ink-color="#ce5b4d" style="--ink-color:#ce5b4d" aria-label="红色笔" aria-pressed="false"></button>
+                  <label class="pen-width-label"><span class="sr-only">笔宽</span><select id="ink-width" aria-label="笔宽"><option value="2">细</option><option value="3" selected>中</option><option value="5">粗</option></select></label>
+                  <span class="tool-spacer"></span><button class="tool-button" id="ink-undo" aria-label="撤销笔迹">↶</button><button class="tool-button" id="ink-redo" aria-label="重做笔迹">↷</button><button class="tool-button" id="ink-more" aria-label="清空草稿">清空</button>
+                </div>
+                <div class="ink-viewport" id="ink-viewport"><canvas id="ink-canvas" aria-label="草稿画布。触控笔书写，手指移动，双指缩放。"></canvas></div>
+                <div class="ink-help"><span id="ink-help">触控笔书写 · 手指移动 · 双指缩放</span><button id="ink-reset-view">适应宽度</button></div>
+              </section>
+            </div>
+
+            <aside class="outline-panel" id="outline-panel" aria-label="题目目录"><div class="outline-heading"><strong>题目目录</strong><span id="outline-count"></span><button class="icon-button mobile-only" id="close-outline" aria-label="关闭题目目录">×</button></div><div class="outline-legend"><span><i class="status-dot done"></i>已提交</span><span><i class="status-dot draft"></i>已作答</span></div><div class="question-outline" id="question-outline"></div></aside>
+          </div>
+
+          <footer class="study-footer"><button class="secondary-button" id="previous-question"><span aria-hidden="true">←</span>上一题</button><button class="footer-outline-button" id="open-outline"><span id="footer-position"></span><span>题目目录 ▦</span></button><div class="footer-hint" id="footer-hint">按照自己的节奏，认真做好每一题。</div><button class="primary-button" id="next-question">下一题<span aria-hidden="true">→</span></button></footer>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="app-dialog" id="history-dialog" aria-labelledby="history-dialog-title"><div class="dialog-heading"><div><span class="eyebrow">LEARNING RECORDS</span><h2 id="history-dialog-title">练习记录</h2></div><button class="icon-button" id="close-history-dialog" aria-label="关闭练习记录">×</button></div><p class="dialog-description">记录保存了结束练习时的题目、作答和草稿。</p><div id="history-list" class="history-list"></div></dialog>
+  <dialog class="app-dialog compact-dialog" id="confirm-dialog" aria-labelledby="confirm-title"><h2 id="confirm-title"></h2><p id="confirm-description"></p><div class="dialog-actions"><button class="secondary-button" id="confirm-cancel">取消</button><button class="primary-button" id="confirm-accept">确认</button></div></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script type="module" src="./tablet-app.js"></script>
+</body>
+</html>

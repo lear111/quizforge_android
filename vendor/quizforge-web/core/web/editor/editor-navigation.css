@@ -1,0 +1,7 @@
+.editor-leave-dialog{width:min(420px,calc(100vw - 32px));max-height:85dvh;padding:24px;border:1px solid var(--line);border-radius:16px;color:inherit;background:var(--panel-bg,#fff);box-shadow:0 20px 70px #30254530}
+.editor-leave-dialog::backdrop{background:#29223e66}
+.editor-leave-dialog h2{margin:0 0 14px;font-size:18px}
+.editor-leave-dialog p{margin:0 0 20px;font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+.editor-leave-dialog .dialog-actions{justify-content:flex-end}
+.editor-leave-dialog button{border-radius:8px;padding:9px 18px;background:var(--accent);color:#fff}
+.editor-leave-dialog button:hover:not(:disabled){background:#644ac3}

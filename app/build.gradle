@@ -1,0 +1,48 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'cloud.treenewbee.quizforge.android'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'cloud.treenewbee.quizforge.android'
+        minSdk 29
+        targetSdk 35
+        versionCode 5
+        versionName '0.2.0-web-sync-preview'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildTypes {
+        debug { applicationIdSuffix '.debug' }
+        release { minifyEnabled false }
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.14.0'
+    implementation 'androidx.javascriptengine:javascriptengine:1.1.1'
+    implementation 'androidx.exifinterface:exifinterface:1.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:5.4.0'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+}
+
+tasks.register('prepareOfflineAssets', Exec) {
+    workingDir rootProject.projectDir
+    commandLine 'node', 'scripts/prepare-assets.mjs'
+    inputs.dir rootProject.file('web')
+    inputs.dir rootProject.file('rules')
+    inputs.dir rootProject.file('vendor')
+    inputs.file rootProject.file('scripts/build-demo.mjs')
+    inputs.file rootProject.file('scripts/prepare-assets.mjs')
+    inputs.file rootProject.file('scripts/generate-web-entry.mjs')
+    inputs.file rootProject.file('package-lock.json')
+    outputs.dir file('src/main/assets/web')
+    outputs.dir file('src/main/assets/rules')
+    outputs.dir file('src/main/assets/licenses')
+    outputs.file file('src/main/assets/demo.qbank')
+}
+tasks.named('preBuild').configure { dependsOn tasks.named('prepareOfflineAssets') }

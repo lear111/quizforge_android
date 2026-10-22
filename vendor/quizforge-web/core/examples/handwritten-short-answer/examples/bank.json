@@ -1,0 +1,8 @@
+{
+  "formatVersion":1,"id":"examples","title":"手写答题区示例","description":"切换草稿书写，练习模式查看，提交后使用视觉 AI 或人工评分。",
+  "extension":{"path":"extensions/手写答题示例/手写简答题"},
+  "questions":[
+    {"id":"information-flow","title":"描述信息处理流程","data":{"stem":"用生活中的一个例子，说明信息处理中的输入、处理和输出三个阶段。请在下面的手写答题区作答。","referenceAnswer":"例如手机拍照：摄像头采集光线为输入；手机进行图像处理为处理；屏幕显示或保存照片为输出。能够结合例子清晰解释三个阶段即可得满分。","maxScore":5,"areas":[{"id":"answer","label":"正式答案","height":480}]}},
+    {"id":"two-regions","title":"分区作答与长答案","data":{"stem":"解释为什么选择题自动评分由题型拓展负责，宿主负责保存数据。可在两个答题区分别说明职责；两个区域都会作为本题答案提交。","referenceAnswer":"拓展掌握题型的数据结构和评分规则，负责比较作答与答案并生成结果。宿主负责持久化、权限、生命周期和汇总，不应猜测拓展的评分规则。","maxScore":5,"areas":[{"id":"extension-role","label":"拓展的职责","height":480},{"id":"host-role","label":"宿主的职责（可加高）","height":960}]}}
+  ]
+}
