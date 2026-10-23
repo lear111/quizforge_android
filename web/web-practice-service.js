@@ -211,7 +211,10 @@ export function createPracticeService(nativeCall,options={}){
       if(request.revision!==old.revision)throw failure('REVISION_CONFLICT','作答记录已变化，请重新读取后重试',409);
       // Web keeps current scratch paper writable after completion. Its layout
       // initialization also saves a whiteboard draft without changing answers.
-      if(state.finished&&request.action!=='whiteboard')throw failure('ROUND_COMPLETED','本轮已完成，请从分值卡开始新一轮',409);
+      // Like Web, answering goes on after completion: drafts save as usual, and a submit or 重做 starts a new
+      // round while the completed one stays frozen in history.
+      if(state.finished&&request.action==='review')throw failure('ROUND_COMPLETED','本轮已完成，请从分值卡开始新一轮',409);
+      if(state.finished&&['submit','retry'].includes(request.action)){state.finished=false;state.webRoundStarted=false;state.roundId=crypto.randomUUID();delete state.summary;}
       if(old.revision>=Number.MAX_SAFE_INTEGER)throw failure('REVISION_LIMIT','作答版本已达到上限',409);
       const next={...clone(old),revision:old.revision+1};delete next.receipts;
       if(['draft','submit'].includes(request.action)){

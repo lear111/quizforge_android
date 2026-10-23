@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "source": "quizforge_web commit",
-  "sourceRevision": "2ad03a1b842f3b74180c6a6f7b45f3a3cc35a43c",
+  "sourceRevision": "3d22a5486471812980f67d4c60dfbce8b7087681",
   "includesWorkingTreeChanges": false,
-  "capturedAt": "2026-10-22T19:33:45.035Z",
+  "capturedAt": "2026-10-23T02:13:54.112Z",
   "files": [
     {
       "path": "core/web/ai/ai-client.js",
@@ -32,8 +32,8 @@
     },
     {
       "path": "core/web/app.js",
-      "sha256": "b4a050aeb436f8299d0a395b5c814b5244cdefb4e43ddce6066c463d3c136503",
-      "bytes": 73661
+      "sha256": "f2b0405db7204164783922ce1b1f46fcbf0576ae965ea1eac885968ad72c5a7b",
+      "bytes": 73652
     },
     {
       "path": "core/web/assets/backgrounds/dawn-lake.svg",
@@ -232,7 +232,7 @@
     },
     {
       "path": "core/web/index.html",
-      "sha256": "9cb9a715302da96deec2d0cbb23d2d94ccf2ccaadc8f36f43b7dad252ca3af53",
+      "sha256": "a72328e65a1d1555b6ffa0a1b500d684bf9f65b1dad175c884248e2ff2d04c26",
       "bytes": 30138
     },
     {
@@ -337,8 +337,8 @@
     },
     {
       "path": "core/web/practice/save-recovery.js",
-      "sha256": "97eddcf28559b24b1785aa45fa3ce94741e9a6b28711ec4b512fcb1b3dcaa1cf",
-      "bytes": 2635
+      "sha256": "760bd43d44c87607825394d3cfa641c328f6253b7842449aa81834c2cfe22bf0",
+      "bytes": 2629
     },
     {
       "path": "core/web/shared/answer-area-channel.js",

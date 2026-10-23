@@ -448,11 +448,17 @@ test('completed-round title editing and scratch-paper saves retain frozen histor
  assert.deepEqual(f.state.webHistory,frozen);assert.deepEqual(f.state.questions.q1,first);
  const writes=f.writes;
  assert.deepEqual(await request(s,basePath+'/questions/q2/actions','POST',body),result);assert.equal(f.writes,writes);
- for(const action of ['draft','submit','retry','review']){
-  await assert.rejects(request(s,basePath+'/questions/q2/actions','POST',{...body,requestId:'completed-blocked-'+action,revision:result.state.revision,action,data:{answer:{value:2},review:{score:2}}}),{code:'ROUND_COMPLETED'});
- }
+ await assert.rejects(request(s,basePath+'/questions/q2/actions','POST',{...body,requestId:'completed-blocked-review',revision:result.state.revision,action:'review',data:{review:{score:2}}}),{code:'ROUND_COMPLETED'});
  assert.equal(f.writes,writes);assert.deepEqual(f.state.webHistory,frozen);
  assert.equal((await request(s,basePath+'/summary')).finished,true);
+
+ // Like Web: a draft still saves in the completed round, and a submit starts a new one.
+ const drafted=await request(s,basePath+'/questions/q2/actions','POST',{...body,requestId:'completed-draft',revision:result.state.revision,action:'draft',data:{answer:{value:2}}});
+ assert.equal(drafted.state.status,'draft');assert.equal(f.state.finished,true);assert.equal(f.state.roundId,roundId);
+ await request(s,basePath+'/questions/q2/actions','POST',{...body,requestId:'completed-submit',revision:drafted.state.revision,action:'submit',data:{answer:{value:2}}});
+ assert.equal(f.state.finished,false);assert.notEqual(f.state.roundId,roundId);
+ assert.deepEqual(f.state.webHistory.find(row=>row.id===roundId),frozen.find(row=>row.id===roundId));
+ assert.equal((await request(s,basePath+'/summary')).finished,false);
 });
 
 test('cold collection reads use declared answer-state without running unused score rules',async()=>{
