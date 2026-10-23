@@ -31,6 +31,9 @@ try{
   Copy-Item -LiteralPath 'app\build\outputs\apk\debug\app-debug.apk' -Destination $apk
   $digest=(Get-FileHash -LiteralPath $apk -Algorithm SHA256).Hash.ToLowerInvariant()
   [IO.File]::WriteAllText(($apk+'.sha256'),$digest+'  '+[IO.Path]::GetFileName($apk)+"`n",[Text.UTF8Encoding]::new($false))
+  # Scripts read the fixed name above; also keep a copy named after versionName, so each build is easy to find.
+  $versionName=[regex]::Match((Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'app\build.gradle')),"versionName\s+'([^']+)'").Groups[1].Value
+  if($versionName){$named=Join-Path $out "QuizForge-Android-$versionName.apk";Copy-Item -LiteralPath $apk -Destination $named -Force;[IO.File]::WriteAllText(($named+'.sha256'),$digest+'  '+[IO.Path]::GetFileName($named)+"`n",[Text.UTF8Encoding]::new($false))}
   $verification=& (Join-Path $PSScriptRoot 'scripts\verify-apk.ps1') -ApkPath $apk
   $verification | Write-Output
   [IO.File]::WriteAllText((Join-Path $acceptanceRoot 'apk-verification.json'),($verification | Out-String),[Text.UTF8Encoding]::new($false))
